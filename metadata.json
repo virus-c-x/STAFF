@@ -1,0 +1,6 @@
+{
+  "name": "Staff Recruitment Portal",
+  "description": "Professional staff recruitment and application portal for community moderation and administration roles, with Supabase integration and GitHub Pages readiness.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
