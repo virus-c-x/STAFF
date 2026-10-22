@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, Shield, Award, Clock, Sparkles } from 'lucide-react';
 import { PositionType } from '../types/application';
+import heroSanctuaryImg from '../assets/images/hero_recruitment_portal_1792624473636.jpg';
 
 interface HeroProps {
   onStartApplication: (position?: PositionType) => void;
@@ -130,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({
               )}
 
               <img
-                src="/src/assets/images/hero_recruitment_portal_1792624473636.jpg"
+                src={heroSanctuaryImg}
                 alt="Community operations command hub and leadership sanctuary"
                 className={`w-full h-full object-cover transition-opacity duration-300 ${
                   imageLoaded ? 'opacity-100' : 'opacity-0'

@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aegis Staff Recruitment Portal</title>
+    <script>
+      // GitHub Pages SPA fallback: redirect to the entry point preserving query and hash
+      sessionStorage.redirect = location.href;
+      var pathSegments = location.pathname.split('/').filter(Boolean);
+      var repo = pathSegments[0] || '';
+      location.replace(location.origin + '/' + repo + '/');
+    </script>
+  </head>
+  <body style="background-color: #060709; color: #D4AF37; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <p>Redirecting to Aegis Staff Portal...</p>
+  </body>
+</html>

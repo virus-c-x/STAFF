@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Shield, ArrowLeft, Award, Sparkles, CheckCircle2 } from 'lucide-react';
+import moderatorBadgeImg from '../assets/images/moderator_role_emblem_1792624473648.jpg';
 
 interface StaffHeroBannerProps {
   onBackToPortal: () => void;
@@ -107,7 +108,7 @@ export const StaffHeroBanner: React.FC<StaffHeroBannerProps> = ({
 
                     {/* Emblem Image Asset */}
                     <img
-                      src="/src/assets/images/moderator_role_emblem_1792624473648.jpg"
+                      src={moderatorBadgeImg}
                       alt="AEGIS Staff Shield Emblem"
                       className={`w-full h-full object-cover rounded-full transition-opacity duration-300 ${
                         badgeImgLoaded ? 'opacity-100' : 'opacity-0'

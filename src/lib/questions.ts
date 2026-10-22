@@ -1,4 +1,6 @@
 import { AgeRangeOption, AvailabilityOption, PositionType } from '../types/application';
+import moderatorEmblem from '../assets/images/moderator_role_emblem_1792624473648.jpg';
+import adminEmblem from '../assets/images/admin_role_emblem_1792624473208.jpg';
 
 export const AGE_RANGE_OPTIONS: AgeRangeOption[] = [
   'Under 16',
@@ -359,7 +361,7 @@ export const ROLE_DETAILS: Record<PositionType, RoleDetail> = {
       'Willingness to escalate uncertain cases rather than guess',
       'Impartiality towards friends and personal acquaintances',
     ],
-    imageSrc: '/src/assets/images/moderator_role_emblem_1792624473648.jpg',
+    imageSrc: moderatorEmblem,
   },
   administrator: {
     type: 'administrator',
@@ -387,6 +389,6 @@ export const ROLE_DETAILS: Record<PositionType, RoleDetail> = {
       'Operational judgment under crisis pressure',
       'Systemic consistency and staff development capability',
     ],
-    imageSrc: '/src/assets/images/admin_role_emblem_1792624473208.jpg',
+    imageSrc: adminEmblem,
   },
 };
