@@ -17,18 +17,18 @@ export const StepProgressBar: React.FC<StepProgressBarProps> = ({
   maxReachedStep,
 }) => {
   const steps = [
-    { num: 1, label: 'Applicant Info' },
-    { num: 2, label: 'Position Selection' },
-    { num: 3, label: 'General Questions' },
+    { num: 1, label: 'Applicant Profile' },
+    { num: 2, label: 'Position Track' },
+    { num: 3, label: 'General Ethics' },
     {
       num: 4,
       label: position === 'administrator' ? 'Admin Scenarios' : 'Moderator Scenarios',
     },
-    { num: 5, label: 'Review & Declarations' },
+    { num: 5, label: 'Review & Submit' },
   ];
 
   return (
-    <div className="w-full bg-[#0E121B] border border-slate-800 rounded-xl p-4 sm:p-5 mb-8">
+    <div className="w-full bg-[#0C0E14]/80 backdrop-blur-md border border-amber-500/20 rounded-xl p-4 sm:p-5 mb-8 shadow-lg">
       <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 scrollbar-none">
         {steps.map((st, idx) => {
           const isCompleted = currentStep > st.num;
@@ -47,20 +47,20 @@ export const StepProgressBar: React.FC<StepProgressBarProps> = ({
                 } ${isActive ? 'opacity-100' : isCompleted ? 'opacity-90' : 'opacity-40'}`}
               >
                 <div
-                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold font-mono transition-colors ${
+                  className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-semibold font-mono transition-all ${
                     isCompleted
-                      ? 'bg-indigo-600 text-white'
+                      ? 'bg-amber-400 text-black font-bold shadow-sm shadow-amber-500/30'
                       : isActive
-                      ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/40'
-                      : 'bg-slate-800 text-slate-400 border border-slate-700'
+                      ? 'bg-amber-500/15 text-amber-300 border border-amber-400/60 shadow-sm shadow-amber-500/20'
+                      : 'bg-slate-900 text-slate-500 border border-white/5'
                   }`}
                 >
-                  {isCompleted ? <Check className="w-3.5 h-3.5" /> : st.num}
+                  {isCompleted ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : st.num}
                 </div>
                 <div className="hidden sm:block">
                   <span
                     className={`block text-xs font-medium ${
-                      isActive ? 'text-white' : 'text-slate-400'
+                      isActive ? 'text-amber-200 font-semibold' : 'text-slate-400'
                     }`}
                   >
                     {st.label}
@@ -72,7 +72,7 @@ export const StepProgressBar: React.FC<StepProgressBarProps> = ({
               {idx < steps.length - 1 && (
                 <div
                   className={`flex-1 min-w-[16px] h-0.5 mx-2 transition-colors ${
-                    currentStep > st.num ? 'bg-indigo-600/70' : 'bg-slate-800'
+                    currentStep > st.num ? 'bg-amber-500/60' : 'bg-slate-800'
                   }`}
                 />
               )}

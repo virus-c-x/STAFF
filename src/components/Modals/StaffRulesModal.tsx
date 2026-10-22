@@ -10,24 +10,24 @@ export const StaffRulesModal: React.FC<StaffRulesModalProps> = ({ isOpen, onClos
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
       <div
-        className="relative w-full max-w-2xl max-h-[85vh] bg-[#0E121B] border border-slate-800 rounded-xl flex flex-col shadow-2xl text-slate-200"
+        className="relative w-full max-w-2xl max-h-[85vh] bg-[#0A0C13] border border-amber-500/30 rounded-2xl flex flex-col shadow-2xl text-slate-200 overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-labelledby="rules-modal-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/5 shrink-0 bg-[#07080D]">
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-indigo-500/10 border border-indigo-500/20 rounded-lg text-indigo-400">
+            <div className="p-2 bg-amber-400/10 border border-amber-400/25 rounded-xl text-amber-400">
               <BookOpen className="w-5 h-5" />
             </div>
             <div>
-              <h2 id="rules-modal-title" className="text-lg font-semibold text-white">
-                Server Rules & Staff Code of Conduct
+              <h2 id="rules-modal-title" className="text-base font-bold text-white uppercase tracking-wider">
+                AEGIS Code of Conduct & Staff Policies
               </h2>
-              <p className="text-xs text-slate-400">Standard Operating Guidelines · Revision 4.2</p>
+              <p className="text-xs text-slate-400">Standard Operating Procedures · Revision 4.2</p>
             </div>
           </div>
           <button
@@ -42,44 +42,46 @@ export const StaffRulesModal: React.FC<StaffRulesModalProps> = ({ isOpen, onClos
         {/* Content */}
         <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-300 leading-relaxed">
           <section className="space-y-3">
-            <h3 className="text-base font-semibold text-white">Core Staff Principles</h3>
+            <h3 className="text-sm font-semibold text-white uppercase tracking-wider text-amber-300">
+              Core Staff Principles
+            </h3>
             <div className="grid gap-3">
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg">
-                <div className="font-medium text-white flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  Impartiality & Anti-Favoritism
+              <div className="p-3 bg-[#06070B] border border-white/5 rounded-xl">
+                <div className="font-semibold text-white flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Impartiality & Zero-Favoritism</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   Community guidelines apply uniformly to all members regardless of friendship, tenure, or server status. If a close friend violates a rule, staff must recuse themselves or report through standard channels.
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg">
-                <div className="font-medium text-white flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  De-escalation First
+              <div className="p-3 bg-[#06070B] border border-white/5 rounded-xl">
+                <div className="font-semibold text-white flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>De-escalation First</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   The primary role of moderation is to diffuse tension and maintain constructive dialogue, not to impose punitive measures prematurely. Always prioritize clear communication.
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg">
-                <div className="font-medium text-white flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  Confidentiality of Staff Matters
+              <div className="p-3 bg-[#06070B] border border-white/5 rounded-xl">
+                <div className="font-semibold text-white flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Confidentiality of Staff Matters</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   Internal staff channels, incident tickets, moderation deliberations, and applicant submissions are strictly confidential. Sharing internal logs outside staff channels results in immediate removal.
                 </p>
               </div>
 
-              <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-lg">
-                <div className="font-medium text-white flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  Least Privilege & Permission Governance
+              <div className="p-3 bg-[#06070B] border border-white/5 rounded-xl">
+                <div className="font-semibold text-white flex items-center gap-2 text-xs">
+                  <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                  <span>Least Privilege & Permission Governance</span>
                 </div>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-xs text-slate-400 mt-1 leading-relaxed">
                   Staff tools, bot commands, and administrative privileges must only be used in the direct execution of moderation duties. Abuse or joking with administrative commands is strictly prohibited.
                 </p>
               </div>
@@ -87,11 +89,13 @@ export const StaffRulesModal: React.FC<StaffRulesModalProps> = ({ isOpen, onClos
           </section>
 
           <section className="space-y-2">
-            <h3 className="text-base font-semibold text-white">Disciplinary Escalation Ladder</h3>
+            <h3 className="text-sm font-semibold text-white uppercase tracking-wider text-amber-300">
+              Disciplinary Escalation Ladder
+            </h3>
             <p className="text-xs text-slate-400">
               Unless handling severe infractions (e.g. unsolicited spam attacks, hate speech, or malicious links), enforcement follows:
             </p>
-            <ol className="list-decimal pl-5 space-y-1 text-slate-400 text-xs">
+            <ol className="list-decimal pl-5 space-y-1 text-slate-400 text-xs leading-relaxed">
               <li><strong className="text-slate-300">Verbal reminder / gentle redirect</strong> in public channel or DM.</li>
               <li><strong className="text-slate-300">Official logged warning</strong> with rule citation and incident context.</li>
               <li><strong className="text-slate-300">Temporary timeout / mute</strong> to cool down heated discourse.</li>
@@ -101,10 +105,10 @@ export const StaffRulesModal: React.FC<StaffRulesModalProps> = ({ isOpen, onClos
         </div>
 
         {/* Footer */}
-        <div className="flex justify-end px-6 py-4 border-t border-slate-800 bg-[#0A0D14] shrink-0">
+        <div className="flex justify-end px-6 py-4 border-t border-white/5 bg-[#07080D] shrink-0">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
+            className="px-4 py-2 text-xs font-semibold text-black bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors"
           >
             Acknowledge & Close
           </button>

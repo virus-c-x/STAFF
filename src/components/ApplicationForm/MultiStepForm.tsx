@@ -27,7 +27,7 @@ import {
   MODERATOR_QUESTIONS,
   ADMINISTRATOR_QUESTIONS,
 } from '../../lib/questions';
-import { RotateCcw, Check, ArrowLeft } from 'lucide-react';
+import { RotateCcw, ArrowLeft } from 'lucide-react';
 
 interface MultiStepFormProps {
   initialPosition?: PositionType;
@@ -74,7 +74,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
     if (targetStep > maxReachedStep) {
       setMaxReachedStep(targetStep);
     }
-    window.scrollTo({ top: 120, behavior: 'smooth' });
+    window.scrollTo({ top: 380, behavior: 'smooth' });
   };
 
   // Step 1 Validation
@@ -254,26 +254,26 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
   }
 
   return (
-    <div className="py-10 max-w-4xl mx-auto px-6">
+    <div className="py-8 max-w-4xl mx-auto px-6">
       {/* Top Bar with Back to Overview & Autosave Badge */}
       <div className="flex items-center justify-between mb-6 text-xs">
         <button
           onClick={onBackToHome}
-          className="text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors"
+          className="text-slate-400 hover:text-amber-300 flex items-center gap-1.5 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
-          <span>Exit to Portal Overview</span>
+          <span>Return to Portal</span>
         </button>
 
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-1.5 text-slate-400">
             <span
               className={`w-2 h-2 rounded-full transition-colors ${
-                autosaveNotice ? 'bg-emerald-400' : 'bg-slate-600'
+                autosaveNotice ? 'bg-amber-400' : 'bg-slate-600'
               }`}
             />
-            <span className="text-[11px]">
-              {autosaveNotice ? 'Autosaved' : 'Draft saved in browser'}
+            <span className="text-[11px] font-mono text-slate-400">
+              {autosaveNotice ? 'Autosaved' : 'Draft preserved'}
             </span>
           </div>
 
@@ -299,7 +299,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
       />
 
       {/* Step Content */}
-      <div className="bg-[#0A0D14] border border-slate-800/80 rounded-2xl p-6 sm:p-8 shadow-xl">
+      <div className="bg-[#0B0D14]/90 backdrop-blur-md border border-amber-500/20 rounded-2xl p-6 sm:p-9 shadow-2xl">
         {currentStep === 1 && (
           <Step1ApplicantInfo
             data={formData.applicantInfo}

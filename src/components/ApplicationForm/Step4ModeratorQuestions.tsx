@@ -20,12 +20,15 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
 }) => {
   return (
     <div className="space-y-6">
-      <div className="border-b border-slate-800 pb-4">
-        <div className="flex items-center gap-2 text-indigo-400 text-xs font-mono mb-1">
+      <div className="border-b border-white/5 pb-4">
+        <div className="flex items-center gap-2 text-amber-400 text-xs font-mono mb-1">
           <Shield className="w-3.5 h-3.5" />
           <span>Moderator Track Evaluation</span>
         </div>
-        <h3 className="text-lg font-bold text-white">Step 4 — Moderator Situational Scenarios</h3>
+        <h3 className="text-lg font-bold text-white flex items-center gap-2">
+          <span className="text-amber-400 font-mono text-sm tracking-wider">04.</span>
+          <span>Moderator Situational Scenarios (8 Questions)</span>
+        </h3>
         <p className="text-xs text-slate-400 mt-1">
           These 8 scenarios assess real-time judgment, de-escalation tact, evidence verification, and adherence to community policies.
         </p>
@@ -42,7 +45,7 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
           return (
             <div
               key={q.id}
-              className="bg-[#0E121B] border border-slate-800 rounded-xl p-5 space-y-3 focus-within:border-indigo-500/60 transition-colors"
+              className="bg-[#090B11] border border-slate-800/80 rounded-xl p-5 space-y-3 focus-within:border-amber-400/70 transition-colors shadow-sm"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -54,7 +57,7 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
                 <div className="text-right shrink-0">
                   <span
                     className={`text-xs font-mono font-medium ${
-                      isMinMet ? 'text-emerald-400' : 'text-slate-500'
+                      isMinMet ? 'text-amber-400 font-semibold' : 'text-slate-500'
                     }`}
                   >
                     {charCount} / min {q.minChars}
@@ -62,10 +65,10 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
                 </div>
               </div>
 
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-400 bg-slate-900/80 px-2.5 py-1 rounded border border-slate-800/80">
-                <HelpCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+              <div className="flex items-center gap-1.5 text-[11px] text-slate-400 bg-amber-500/[0.04] px-2.5 py-1 rounded-md border border-amber-500/15">
+                <HelpCircle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                 <span>
-                  <strong className="text-slate-300">Evaluation Criteria:</strong> {q.evaluationFocus}
+                  <strong className="text-amber-300/90 font-medium">Evaluation Criteria:</strong> {q.evaluationFocus}
                 </span>
               </div>
 
@@ -76,8 +79,10 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
                   onChange={(e) => onChange(fieldKey, e.target.value)}
                   maxLength={q.maxChars}
                   placeholder="Describe your step-by-step approach..."
-                  className={`w-full bg-slate-950 border rounded-lg p-3 text-xs sm:text-sm text-slate-200 placeholder-slate-600 focus:outline-none transition-colors ${
-                    hasError ? 'border-rose-500 focus:border-rose-500' : 'border-slate-800 focus:border-indigo-500'
+                  className={`w-full bg-[#06070B] border rounded-lg p-3 text-xs sm:text-sm text-slate-200 placeholder-slate-600 focus:outline-none transition-colors ${
+                    hasError
+                      ? 'border-rose-500 focus:border-rose-500'
+                      : 'border-slate-800 focus:border-amber-400 focus:ring-1 focus:ring-amber-400/30'
                   }`}
                 />
               </div>
@@ -94,7 +99,7 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-6 border-t border-slate-800">
+      <div className="flex items-center justify-between pt-6 border-t border-white/5">
         <button
           type="button"
           onClick={onBack}
@@ -107,7 +112,7 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
         <button
           type="button"
           onClick={onNext}
-          className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold rounded-lg transition-colors flex items-center gap-1.5"
+          className="px-6 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5"
         >
           <span>Continue to Final Review</span>
           <ArrowRight className="w-3.5 h-3.5" />
