@@ -18,7 +18,7 @@ export interface SupabaseConfig {
 }
 
 export function getSupabaseConfig(): SupabaseConfig {
-  const envUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://gaxjpazgvwyqstmszymc.supabase.co/rest/v1/')?.trim() || '';
+  const envUrl = (import.meta.env.VITE_SUPABASE_URL || 'https://gaxjpazgvwyqstmszymc.supabase.co')?.trim() || '';
   const envKey = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim() || '';
 
   if (envUrl && envKey) {
