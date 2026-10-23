@@ -1,11 +1,14 @@
-import React from 'react';
-import { Shield, Lock, ArrowRight, Sparkles, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Lock, ArrowRight, Shield, Megaphone, AlertCircle } from 'lucide-react';
+import { RecruitmentSettings } from '../types/admin';
+import { fetchRecruitmentSettings } from '../lib/supabase';
 
 interface PortalHomeProps {
   onSelectStaff: () => void;
   onOpenStatusCheck: () => void;
   onOpenPrivacy: () => void;
   onOpenRules: () => void;
+  onOpenAdmin?: () => void;
 }
 
 export const PortalHome: React.FC<PortalHomeProps> = ({
@@ -13,7 +16,17 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
   onOpenStatusCheck,
   onOpenPrivacy,
   onOpenRules,
+  onOpenAdmin,
 }) => {
+  const [settings, setSettings] = useState<RecruitmentSettings | null>(null);
+
+  useEffect(() => {
+    fetchRecruitmentSettings().then(setSettings).catch(console.error);
+  }, []);
+
+  const staffIntakeOpen = settings ? settings.staff_intake_open : true;
+  const judgeIntakeOpen = settings ? settings.judge_intake_open : false;
+
   return (
     <div className="relative min-h-screen flex flex-col justify-between px-6 py-8 sm:py-12 overflow-hidden bg-[#060709]">
       {/* Background ambient lighting */}
@@ -22,41 +35,59 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
 
       {/* Top Header Row */}
       <header className="relative z-10 max-w-6xl w-full mx-auto flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-[1px] shadow-sm shadow-amber-500/20">
-            <div className="w-full h-full bg-[#090B10] rounded-[7px] flex items-center justify-center">
-              <Shield className="w-4 h-4 text-amber-400" />
-            </div>
-          </div>
-          <span className="text-sm font-bold tracking-[0.25em] text-white uppercase">
-            Aegis
+        <div className="flex items-center gap-3.5">
+          <img
+            src="/icon.png"
+            alt="ASPIDA Icon"
+            className="w-10 h-10 sm:w-11 sm:h-11 object-contain drop-shadow-md select-none shrink-0"
+          />
+          <span className="text-base sm:text-lg font-bold tracking-[0.25em] text-white uppercase gold-gradient-text">
+            ASPIDA
           </span>
         </div>
 
         <button
           onClick={onOpenStatusCheck}
-          className="text-xs text-slate-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/5 hover:border-amber-500/30 bg-white/[0.02]"
+          className="text-xs text-slate-400 hover:text-amber-300 transition-colors flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/5 hover:border-amber-500/30 bg-white/[0.02] cursor-pointer"
         >
           <span>Check Status</span>
         </button>
       </header>
 
-      {/* Main Center Stage: Logo, Title & The 2 Cards */}
-      <main className="relative z-10 max-w-4xl w-full mx-auto my-auto py-12 flex flex-col items-center text-center">
-        {/* Emblem Insignia */}
-        <div className="mb-6 relative">
-          <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-b from-amber-400/25 via-amber-500/10 to-transparent p-[1px] flex items-center justify-center shadow-2xl shadow-amber-500/10">
-            <div className="w-full h-full bg-[#080A0F] rounded-[15px] flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-radial from-amber-400/10 to-transparent opacity-60" />
-              <Shield className="w-10 h-10 sm:w-12 sm:h-12 text-amber-400/90" strokeWidth={1.5} />
-            </div>
+      {/* Broadcast Banner if active */}
+      {settings?.banner_active && settings.banner_text && (
+        <div className="relative z-10 max-w-3xl w-full mx-auto mt-6">
+          <div
+            className={`p-3.5 rounded-xl text-xs flex items-center gap-3 border shadow-lg ${
+              settings.banner_type === 'warning'
+                ? 'bg-amber-500/10 border-amber-500/30 text-amber-300'
+                : settings.banner_type === 'info'
+                ? 'bg-blue-500/10 border-blue-500/30 text-blue-300'
+                : 'bg-gradient-to-r from-amber-500/15 via-[#0A0D17] to-amber-500/10 border-amber-400/30 text-amber-200'
+            }`}
+          >
+            <Megaphone className="w-4 h-4 shrink-0 text-amber-400" />
+            <span className="font-medium">{settings.banner_text}</span>
           </div>
+        </div>
+      )}
+
+      {/* Main Center Stage: Wide Banner, Title & The 2 Cards */}
+      <main className="relative z-10 max-w-4xl w-full mx-auto my-auto py-6 sm:py-10 flex flex-col items-center text-center">
+        {/* Wide Hero Banner */}
+        <div className="w-full max-w-3xl lg:max-w-4xl mb-8 sm:mb-10 rounded-2xl overflow-hidden border border-amber-500/25 shadow-2xl relative bg-[#090B12]">
+          <img
+            src="/banner.png"
+            alt="ASPIDA Official Banner"
+            className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060709] via-transparent to-transparent opacity-40 pointer-events-none" />
         </div>
 
         {/* Title & Subtitle */}
-        <div className="space-y-3 mb-12 sm:mb-16">
+        <div className="space-y-3 mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white uppercase">
-            <span className="gold-gradient-text tracking-[0.15em]">AEGIS</span>
+            <span className="gold-gradient-text tracking-[0.15em]">ASPIDA</span>
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 tracking-[0.2em] uppercase max-w-md mx-auto">
             Recruitment & Appointment Portal
@@ -70,100 +101,194 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
 
         {/* The Two Primary Cards: STAFF vs JUDGE */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl px-2">
-          {/* Option 1: STAFF (Active) */}
-          <button
-            type="button"
-            onClick={onSelectStaff}
-            className="group relative text-left p-8 rounded-2xl bg-[#0D0F16]/70 hover:bg-[#121520]/80 border border-amber-500/30 hover:border-amber-400/60 transition-all duration-300 gold-border-glow flex flex-col justify-between min-h-[220px] focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer overflow-hidden"
-          >
-            {/* Subtle corner light */}
-            <div className="absolute -top-12 -right-12 w-28 h-28 bg-amber-400/10 rounded-full blur-2xl group-hover:bg-amber-400/20 transition-all pointer-events-none" />
+          {/* Option 1: STAFF */}
+          {staffIntakeOpen ? (
+            <button
+              type="button"
+              onClick={onSelectStaff}
+              className="group relative text-left p-8 rounded-2xl border border-amber-500/35 hover:border-amber-400/70 transition-all duration-300 gold-border-glow flex flex-col justify-between min-h-[230px] focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer overflow-hidden shadow-xl"
+              style={{
+                backgroundImage: `url('/staffbanner.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              {/* Dark readable gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0A0C13]/90 via-[#0B0D16]/85 to-[#07080D]/95 group-hover:from-[#0A0C13]/80 group-hover:via-[#0B0D16]/75 group-hover:to-[#07080D]/90 transition-all" />
+              <div className="absolute -top-12 -right-12 w-28 h-28 bg-amber-400/15 rounded-full blur-2xl group-hover:bg-amber-400/25 transition-all pointer-events-none" />
 
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-widest text-amber-400/90 uppercase px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/20">
-                  Applications Open
-                </span>
-                <ArrowRight className="w-4 h-4 text-amber-400 transform group-hover:translate-x-1 transition-transform" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-amber-300 uppercase px-2 py-0.5 rounded bg-black/60 border border-amber-400/30 backdrop-blur-sm">
+                    Applications Open
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-amber-400 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+
+                <h2 className="text-2xl font-bold tracking-wider text-white group-hover:text-amber-200 transition-colors uppercase drop-shadow">
+                  STAFF
+                </h2>
+
+                <p className="text-xs text-slate-300 leading-relaxed mt-2.5 drop-shadow-sm">
+                  Apply for community moderation and server administration positions.
+                </p>
               </div>
 
-              <h2 className="text-2xl font-bold tracking-wider text-white group-hover:text-amber-200 transition-colors uppercase">
-                STAFF
-              </h2>
+              <div className="relative z-10 pt-6 mt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300 group-hover:text-amber-300 transition-colors font-medium">
+                <span>Begin Application</span>
+                <span className="text-[11px] font-mono text-amber-400/90">→</span>
+              </div>
+            </button>
+          ) : (
+            <div
+              className="relative text-left p-8 rounded-2xl border border-white/10 opacity-75 cursor-not-allowed flex flex-col justify-between min-h-[230px] select-none overflow-hidden shadow-xl"
+              style={{
+                backgroundImage: `url('/staffbanner.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="absolute inset-0 bg-[#07090E]/90 backdrop-blur-[0.5px]" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase px-2 py-0.5 rounded bg-black/60 border border-white/15 backdrop-blur-sm flex items-center gap-1.5">
+                    <Lock className="w-2.5 h-2.5 text-amber-400/80" />
+                    <span>Intake Closed</span>
+                  </span>
+                  <Lock className="w-4 h-4 text-slate-400" />
+                </div>
 
-              <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
-                Apply for community moderation and server administration positions.
-              </p>
-            </div>
+                <h2 className="text-2xl font-bold tracking-wider text-slate-200 uppercase drop-shadow">
+                  STAFF
+                </h2>
 
-            <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-400 group-hover:text-amber-300 transition-colors font-medium">
-              <span>Begin Application</span>
-              <span className="text-[11px] font-mono text-amber-400/70">→</span>
-            </div>
-          </button>
-
-          {/* Option 2: JUDGE (Locked / Coming Soon) */}
-          <div
-            className="relative text-left p-8 rounded-2xl bg-[#0A0B10]/40 border border-white/5 opacity-65 cursor-not-allowed flex flex-col justify-between min-h-[220px] select-none overflow-hidden"
-            aria-disabled="true"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[10px] font-mono tracking-widest text-slate-400 uppercase px-2 py-0.5 rounded bg-white/5 border border-white/10 flex items-center gap-1.5">
-                  <Lock className="w-2.5 h-2.5 text-amber-400/70" />
-                  <span>Locked</span>
-                </span>
-                <Lock className="w-4 h-4 text-slate-500" />
+                <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
+                  Staff intake is currently paused by administration for this cohort.
+                </p>
               </div>
 
-              <div className="flex items-baseline gap-2">
-                <h2 className="text-2xl font-bold tracking-wider text-slate-300 uppercase">
+              <div className="relative z-10 pt-6 mt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                <span className="text-[11px] font-mono tracking-widest text-slate-400 uppercase">
+                  Submissions Paused
+                </span>
+                <span className="text-[11px] text-slate-500">Cohort Gated</span>
+              </div>
+            </div>
+          )}
+
+          {/* Option 2: JUDGE */}
+          {judgeIntakeOpen ? (
+            <button
+              type="button"
+              onClick={onSelectStaff}
+              className="group relative text-left p-8 rounded-2xl border border-amber-500/35 hover:border-amber-400/70 transition-all duration-300 gold-border-glow flex flex-col justify-between min-h-[230px] focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer overflow-hidden shadow-xl"
+              style={{
+                backgroundImage: `url('/judgebanner.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-b from-[#0A0C13]/90 via-[#0B0D16]/85 to-[#07080D]/95 group-hover:from-[#0A0C13]/80 group-hover:via-[#0B0D16]/75 group-hover:to-[#07080D]/90 transition-all" />
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-amber-300 uppercase px-2 py-0.5 rounded bg-black/60 border border-amber-400/30 backdrop-blur-sm">
+                    Applications Open
+                  </span>
+                  <ArrowRight className="w-4 h-4 text-amber-400 transform group-hover:translate-x-1 transition-transform" />
+                </div>
+
+                <h2 className="text-2xl font-bold tracking-wider text-white group-hover:text-amber-200 transition-colors uppercase drop-shadow">
                   JUDGE
                 </h2>
+
+                <p className="text-xs text-slate-300 leading-relaxed mt-2.5 drop-shadow-sm">
+                  Dispute arbitration, tournament governance, and judicial review board.
+                </p>
               </div>
 
-              <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
-                Dispute arbitration, tournament governance, and judicial review board.
-              </p>
-            </div>
+              <div className="relative z-10 pt-6 mt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300 group-hover:text-amber-300 transition-colors font-medium">
+                <span>Begin Application</span>
+                <span className="text-[11px] font-mono text-amber-400/90">→</span>
+              </div>
+            </button>
+          ) : (
+            <div
+              className="relative text-left p-8 rounded-2xl border border-white/10 opacity-75 cursor-not-allowed flex flex-col justify-between min-h-[230px] select-none overflow-hidden shadow-xl"
+              style={{
+                backgroundImage: `url('/judgebanner.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+              aria-disabled="true"
+            >
+              <div className="absolute inset-0 bg-[#07090E]/85 backdrop-blur-[0.5px]" />
 
-            <div className="pt-6 mt-4 border-t border-white/5 flex items-center justify-between text-xs">
-              <span className="text-[11px] font-mono tracking-widest text-amber-400/80 uppercase font-semibold">
-                COMING SOON
-              </span>
-              <span className="text-[11px] text-slate-400">Cohort Pending</span>
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase px-2 py-0.5 rounded bg-black/60 border border-white/15 backdrop-blur-sm flex items-center gap-1.5">
+                    <Lock className="w-2.5 h-2.5 text-amber-400/80" />
+                    <span>Locked</span>
+                  </span>
+                  <Lock className="w-4 h-4 text-slate-400" />
+                </div>
+
+                <div className="flex items-baseline gap-2">
+                  <h2 className="text-2xl font-bold tracking-wider text-slate-200 uppercase drop-shadow">
+                    JUDGE
+                  </h2>
+                </div>
+
+                <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
+                  Dispute arbitration, tournament governance, and judicial review board.
+                </p>
+              </div>
+
+              <div className="relative z-10 pt-6 mt-4 border-t border-white/10 flex items-center justify-between text-xs">
+                <span className="text-[11px] font-mono tracking-widest text-amber-400/90 uppercase font-semibold">
+                  COMING SOON
+                </span>
+                <span className="text-[11px] text-slate-400">Cohort Pending</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </main>
 
       {/* Quiet Footer */}
       <footer className="relative z-10 max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 text-xs text-slate-400">
         <div className="flex items-center gap-2">
-          <span>© {new Date().getFullYear()} AEGIS Operations</span>
-          <span aria-hidden="true" className="text-slate-600">·</span>
-          <span>Security Protocol v4.2</span>
+          <span>© {new Date().getFullYear()} ASPIDA Operations</span>
         </div>
 
         <div className="flex items-center gap-5">
           <button
             onClick={onOpenPrivacy}
-            className="hover:text-amber-300 transition-colors text-left"
+            className="hover:text-amber-300 transition-colors text-left cursor-pointer"
           >
             Privacy Notice
           </button>
           <button
             onClick={onOpenRules}
-            className="hover:text-amber-300 transition-colors text-left"
+            className="hover:text-amber-300 transition-colors text-left cursor-pointer"
           >
             Staff Rules
           </button>
           <button
             onClick={onOpenStatusCheck}
-            className="hover:text-amber-300 transition-colors text-left"
+            className="hover:text-amber-300 transition-colors text-left cursor-pointer"
           >
             Track Status
           </button>
+          {onOpenAdmin && (
+            <button
+              onClick={onOpenAdmin}
+              className="text-slate-600 hover:text-amber-400/90 transition-colors text-left cursor-pointer flex items-center gap-1 font-mono text-[11px]"
+              title="Restricted Administrative Access"
+            >
+              <Shield className="w-3 h-3 text-slate-600 group-hover:text-amber-400" />
+              <span>Admin Access</span>
+            </button>
+          )}
         </div>
       </footer>
     </div>

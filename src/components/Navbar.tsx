@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Shield } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Shield } from 'lucide-react';
 
 interface NavbarProps {
   onApplyClick: () => void;
@@ -24,14 +24,14 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Zone 1: Single text element wordmark */}
         <button
           onClick={onBackToPortal}
-          className="text-base sm:text-lg font-bold tracking-[0.2em] text-white hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2.5 uppercase text-left"
+          className="text-base sm:text-lg font-bold tracking-[0.2em] text-white hover:text-amber-300 transition-colors whitespace-nowrap shrink-0 flex items-center gap-3 uppercase text-left cursor-pointer"
         >
-          <div className="w-6 h-6 rounded-md bg-gradient-to-br from-amber-300 via-amber-500 to-amber-700 p-[1px]">
-            <div className="w-full h-full bg-[#080A10] rounded-[5px] flex items-center justify-center">
-              <Shield className="w-3.5 h-3.5 text-amber-400" />
-            </div>
-          </div>
-          <span className="gold-gradient-text font-extrabold">AEGIS</span>
+          <img
+            src="/icon.png"
+            alt="ASPIDA"
+            className="w-9 h-9 sm:w-10 sm:h-10 object-contain drop-shadow-md select-none shrink-0"
+          />
+          <span className="gold-gradient-text font-extrabold">ASPIDA</span>
         </button>
 
         {/* Zone 2: Clean single-line text navigation links */}
@@ -80,7 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {currentView === 'portal' ? (
             <button
               onClick={onApplyClick}
-              className="px-4 py-2 text-xs font-bold text-black bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 rounded-lg transition-all duration-150 flex items-center gap-2 whitespace-nowrap shrink-0 shadow-sm shadow-amber-500/30"
+              className="Btn gap-2 whitespace-nowrap shrink-0 shadow-sm shadow-amber-500/30"
             >
               <span>Apply for Staff</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -88,9 +88,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           ) : (
             <button
               onClick={onBackToPortal}
-              className="px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0"
+              className="Btn gap-2 whitespace-nowrap shrink-0"
             >
-              Back to Portal
+              <ArrowLeft className="w-3.5 h-3.5" />
+              <span>Back to Portal</span>
             </button>
           )}
         </div>

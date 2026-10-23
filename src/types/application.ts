@@ -27,9 +27,11 @@ export interface ApplicantInfo {
   platformUserId: string;
   ageRange: AgeRangeOption | '';
   timeZone: string;
+  country?: string;
+  contactMethod: string;
+  contactEmail?: string;
   languages: string[];
   otherLanguage?: string;
-  contactMethod: string;
   weeklyAvailability: AvailabilityOption | '';
 }
 

@@ -83,27 +83,35 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
     const { applicantInfo } = formData;
 
     if (!applicantInfo.displayName.trim()) {
-      newErrors.displayName = 'Display Name is required.';
+      newErrors.displayName = 'Full name is required.';
     } else if (applicantInfo.displayName.trim().length < 2) {
-      newErrors.displayName = 'Display Name must be at least 2 characters.';
+      newErrors.displayName = 'Full name must be at least 2 characters.';
     }
 
     if (!applicantInfo.platformUsername.trim()) {
-      newErrors.platformUsername = 'Platform Username is required.';
+      newErrors.platformUsername = 'Discord username is required.';
     } else if (applicantInfo.platformUsername.trim().length < 2) {
-      newErrors.platformUsername = 'Platform Username must be at least 2 characters.';
+      newErrors.platformUsername = 'Discord username must be at least 2 characters.';
     }
 
     if (!applicantInfo.ageRange) {
       newErrors.ageRange = 'Please select your age bracket.';
     }
 
-    if (!applicantInfo.timeZone.trim()) {
-      newErrors.timeZone = 'Please select your primary time zone.';
+    const countryVal = (applicantInfo.country || applicantInfo.timeZone || '').trim();
+    if (!countryVal) {
+      newErrors.country = 'Please select your country.';
     }
 
     if (!applicantInfo.contactMethod.trim()) {
       newErrors.contactMethod = 'A primary contact method is required.';
+    } else if (applicantInfo.contactMethod.toLowerCase() === 'gmail') {
+      const email = (applicantInfo.contactEmail || '').trim();
+      if (!email) {
+        newErrors.contactEmail = 'Please enter your Gmail address.';
+      } else if (!email.includes('@')) {
+        newErrors.contactEmail = 'Please enter a valid email address (e.g. username@gmail.com).';
+      }
     }
 
     if (!applicantInfo.weeklyAvailability) {
@@ -236,7 +244,7 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
   // If successfully submitted, render Success View
   if (submissionResult && submissionResult.success) {
     return (
-      <div className="py-12 max-w-4xl mx-auto px-6">
+      <div className="py-12 max-w-4xl mx-auto px-6 animate-step-fade">
         <SubmissionSuccess
           referenceCode={submissionResult.referenceCode}
           formData={formData}
@@ -299,7 +307,10 @@ export const MultiStepForm: React.FC<MultiStepFormProps> = ({
       />
 
       {/* Step Content */}
-      <div className="bg-[#0B0D14]/90 backdrop-blur-md border border-amber-500/20 rounded-2xl p-6 sm:p-9 shadow-2xl">
+      <div
+        key={currentStep}
+        className="bg-[#0B0D14]/90 backdrop-blur-md border border-amber-500/20 rounded-2xl p-6 sm:p-9 shadow-2xl animate-step-fade"
+      >
         {currentStep === 1 && (
           <Step1ApplicantInfo
             data={formData.applicantInfo}

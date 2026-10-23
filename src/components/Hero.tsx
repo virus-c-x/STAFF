@@ -30,14 +30,6 @@ export const Hero: React.FC<HeroProps> = ({
                 Staff applications are currently paused while our review board evaluates submitted candidates. Please check back next cycle.
               </span>
             </div>
-            {onToggleRecruitmentOpen && (
-              <button
-                onClick={onToggleRecruitmentOpen}
-                className="text-xs px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 rounded-md transition-colors shrink-0"
-              >
-                Reopen Cohort (Staff Demo)
-              </button>
-            )}
           </div>
         ) : (
           <div className="flex items-center justify-between mb-4">
@@ -49,16 +41,6 @@ export const Hero: React.FC<HeroProps> = ({
               <span aria-hidden="true">·</span>
               <span>Turnaround 48–72 Hours</span>
             </div>
-
-            {onToggleRecruitmentOpen && (
-              <button
-                onClick={onToggleRecruitmentOpen}
-                className="text-[11px] text-slate-500 hover:text-slate-400 transition-colors"
-                title="Toggle open/closed banner for demo testing"
-              >
-                [Preview Closed Banner]
-              </button>
-            )}
           </div>
         )}
 
@@ -85,8 +67,8 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className="text-slate-200 font-semibold">Blind Scenario Rubric</span>
               </div>
               <div>
-                <span className="text-slate-500 block mb-0.5">Security</span>
-                <span className="text-slate-200 font-semibold">PostgreSQL RLS Encrypted</span>
+                <span className="text-slate-500 block mb-0.5">Privacy</span>
+                <span className="text-slate-200 font-semibold">Confidential Review</span>
               </div>
             </div>
 

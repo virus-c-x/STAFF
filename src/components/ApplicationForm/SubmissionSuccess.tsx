@@ -35,16 +35,21 @@ export const SubmissionSuccess: React.FC<SubmissionSuccessProps> = ({
   };
 
   const handleDownloadReceipt = () => {
-    const content = `AEGIS STAFF RECRUITMENT APPLICATION RECEIPT
+    const contactMethodStr = formData.applicantInfo.contactMethod === 'Gmail' && formData.applicantInfo.contactEmail
+      ? `Gmail (${formData.applicantInfo.contactEmail})`
+      : formData.applicantInfo.contactMethod;
+
+    const content = `ASPIDA STAFF RECRUITMENT APPLICATION RECEIPT
 =========================================
 Reference Code:      ${referenceCode}
 Target Position:     ${formData.position?.toUpperCase()}
-Display Name:        ${formData.applicantInfo.displayName}
-Platform Handle:     ${formData.applicantInfo.platformUsername}
-Contact Method:      ${formData.applicantInfo.contactMethod}
+Full Name:           ${formData.applicantInfo.displayName}
+Discord Username:    ${formData.applicantInfo.platformUsername}
+Country:             ${formData.applicantInfo.country || formData.applicantInfo.timeZone}
+Contact Method:      ${contactMethodStr}
 Weekly Availability: ${formData.applicantInfo.weeklyAvailability}
 Submission Date:     ${new Date().toUTCString()}
-Database Storage:    ${isLiveSupabase ? 'Supabase PostgreSQL (Live)' : 'Local Secure Sandbox'}
+Status:              Received & Logged
 =========================================
 
 IMPORTANT INSTRUCTIONS:
@@ -58,7 +63,7 @@ Thank you for your dedication to community safety and leadership!
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `aegis-application-${referenceCode}.txt`;
+    link.download = `aspida-application-${referenceCode}.txt`;
     link.click();
     URL.revokeObjectURL(url);
   };
@@ -89,7 +94,7 @@ Thank you for your dedication to community safety and leadership!
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
           <button
             onClick={handleCopy}
-            className="px-4 py-2 text-xs font-semibold text-black bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors flex items-center gap-1.5 shadow-sm"
+            className="Btn gap-2 shrink-0 shadow-sm"
           >
             {copied ? (
               <>
@@ -165,17 +170,17 @@ Thank you for your dedication to community safety and leadership!
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-white/5">
         <button
           onClick={() => onOpenStatusCheck(referenceCode)}
-          className="w-full sm:w-auto px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-amber-500/20 flex items-center justify-center gap-2"
+          className="Btn gap-2 shrink-0 shadow-md shadow-amber-500/20 w-full sm:w-auto"
         >
-          <Search className="w-3.5 h-3.5 text-black" />
+          <Search className="w-3.5 h-3.5 text-[#ffd277]" />
           <span>Check Status Now</span>
         </button>
 
         <button
           onClick={onReset}
-          className="w-full sm:w-auto px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-medium rounded-lg border border-slate-700 transition-colors"
+          className="Btn gap-2 shrink-0 w-full sm:w-auto"
         >
-          Return to Portal
+          <span>Return to Portal</span>
         </button>
       </div>
     </div>

@@ -99,11 +99,11 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-6 border-t border-white/5">
+      <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-white/5 gap-3">
         <button
           type="button"
           onClick={onBack}
-          className="px-4 py-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors flex items-center gap-1.5"
+          className="Btn gap-2 shrink-0 w-full sm:w-auto"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to General Questions</span>
@@ -112,7 +112,7 @@ export const Step4ModeratorQuestions: React.FC<Step4ModeratorQuestionsProps> = (
         <button
           type="button"
           onClick={onNext}
-          className="px-6 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-black text-xs font-bold rounded-lg transition-all shadow-md shadow-amber-500/20 flex items-center gap-1.5"
+          className="Btn gap-2 shrink-0 shadow-md shadow-amber-500/20 w-full sm:w-auto"
         >
           <span>Continue to Final Review</span>
           <ArrowRight className="w-3.5 h-3.5" />

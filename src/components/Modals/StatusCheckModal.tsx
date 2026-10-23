@@ -66,9 +66,9 @@ export const StatusCheckModal: React.FC<StatusCheckModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-modal-backdrop">
       <div
-        className="relative w-full max-w-lg bg-[#0A0C13] border border-amber-500/30 rounded-2xl flex flex-col shadow-2xl text-slate-200 overflow-hidden"
+        className="relative w-full max-w-lg bg-[#0A0C13] border border-amber-500/30 rounded-2xl flex flex-col shadow-2xl text-slate-200 overflow-hidden animate-modal-panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby="status-modal-title"
@@ -113,10 +113,10 @@ export const StatusCheckModal: React.FC<StatusCheckModalProps> = ({
               <button
                 type="submit"
                 disabled={loading || !code.trim()}
-                className="px-5 py-2.5 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 disabled:opacity-40 text-black text-xs font-bold rounded-lg transition-all flex items-center gap-2 shrink-0 shadow-md shadow-amber-500/20"
+                className="Btn gap-2 shrink-0 shadow-md shadow-amber-500/20"
               >
                 {loading ? (
-                  <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin" />
+                  <span className="w-4 h-4 border-2 border-[#ffd277]/30 border-t-[#ffd277] rounded-full animate-spin" />
                 ) : (
                   <>
                     <span>Verify</span>
@@ -135,7 +135,7 @@ export const StatusCheckModal: React.FC<StatusCheckModalProps> = ({
             <div className="mt-4 border-t border-white/5 pt-4">
               {loading ? (
                 <div className="py-6 text-center text-slate-400 text-xs">
-                  Querying database registry...
+                  Searching for application...
                 </div>
               ) : result && result.found && result.status ? (
                 <div className="space-y-4">

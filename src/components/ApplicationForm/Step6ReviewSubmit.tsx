@@ -86,32 +86,40 @@ export const Step6ReviewSubmit: React.FC<Step6ReviewSubmitProps> = ({
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
           <div>
-            <span className="text-slate-500 block mb-0.5">Display Name</span>
+            <span className="text-slate-500 block mb-0.5">Full name</span>
             <span className="text-slate-200 font-medium">{applicantInfo.displayName}</span>
           </div>
           <div>
-            <span className="text-slate-500 block mb-0.5">Platform Handle</span>
+            <span className="text-slate-500 block mb-0.5">Discord username</span>
             <span className="text-slate-200 font-medium">{applicantInfo.platformUsername}</span>
           </div>
           <div>
-            <span className="text-slate-500 block mb-0.5">Platform User ID</span>
+            <span className="text-slate-500 block mb-0.5">Discord ID</span>
             <span className="text-slate-200 font-mono">
               {applicantInfo.platformUserId || 'Not provided'}
             </span>
           </div>
           <div>
-            <span className="text-slate-500 block mb-0.5">Age Range</span>
+            <span className="text-slate-500 block mb-0.5">Age bracket</span>
             <span className="text-slate-200 font-medium">{applicantInfo.ageRange}</span>
           </div>
           <div>
-            <span className="text-slate-500 block mb-0.5">Time Zone</span>
-            <span className="text-slate-200 font-medium">{applicantInfo.timeZone}</span>
+            <span className="text-slate-500 block mb-0.5">Country</span>
+            <span className="text-slate-200 font-medium">{applicantInfo.country || applicantInfo.timeZone}</span>
+          </div>
+          <div>
+            <span className="text-slate-500 block mb-0.5">Primary Contact</span>
+            <span className="text-slate-200 font-medium">
+              {applicantInfo.contactMethod === 'Gmail' && applicantInfo.contactEmail
+                ? `Gmail (${applicantInfo.contactEmail})`
+                : applicantInfo.contactMethod}
+            </span>
           </div>
           <div>
             <span className="text-slate-500 block mb-0.5">Availability</span>
             <span className="text-slate-200 font-medium">{applicantInfo.weeklyAvailability}</span>
           </div>
-          <div className="col-span-2 sm:col-span-3">
+          <div className="col-span-2">
             <span className="text-slate-500 block mb-0.5">Languages</span>
             <span className="text-slate-200 font-medium">
               {applicantInfo.languages.join(', ')}
@@ -303,7 +311,7 @@ export const Step6ReviewSubmit: React.FC<Step6ReviewSubmitProps> = ({
         <div className="p-4 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-300 text-xs flex items-start gap-3">
           <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
           <div>
-            <strong className="font-semibold block text-rose-200">Submission Transmission Issue:</strong>
+            <strong className="font-semibold block text-rose-200">Submission Failed:</strong>
             <span>{submissionError}</span>
             <span className="block mt-1 text-slate-400">
               Your answers have been preserved. You can safely try submitting again.
@@ -313,12 +321,12 @@ export const Step6ReviewSubmit: React.FC<Step6ReviewSubmitProps> = ({
       )}
 
       {/* Final Action Bar */}
-      <div className="flex items-center justify-between pt-6 border-t border-white/5">
+      <div className="flex flex-col sm:flex-row items-center justify-between pt-6 border-t border-white/5 gap-3">
         <button
           type="button"
           onClick={onBack}
           disabled={isSubmitting}
-          className="px-4 py-2 text-xs font-medium text-slate-400 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-lg transition-colors flex items-center gap-1.5"
+          className="Btn gap-2 shrink-0 w-full sm:w-auto"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           <span>Back to Scenarios</span>
@@ -328,12 +336,12 @@ export const Step6ReviewSubmit: React.FC<Step6ReviewSubmitProps> = ({
           type="button"
           onClick={onSubmit}
           disabled={isSubmitting || !allDeclarationsChecked}
-          className="px-8 py-3 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 disabled:opacity-40 disabled:pointer-events-none text-black text-xs sm:text-sm font-bold rounded-lg transition-all shadow-lg shadow-amber-500/25 flex items-center gap-2 cursor-pointer"
+          className="Btn gap-2 shrink-0 shadow-lg shadow-amber-500/25 w-full sm:w-auto"
         >
           {isSubmitting ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin text-black" />
-              <span>Transmitting Application...</span>
+              <Loader2 className="w-4 h-4 animate-spin text-[#ffd277]" />
+              <span>Submitting Application...</span>
             </>
           ) : (
             <>

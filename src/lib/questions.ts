@@ -392,3 +392,7 @@ export const ROLE_DETAILS: Record<PositionType, RoleDetail> = {
     imageSrc: adminEmblem,
   },
 };
+
+export const MODERATOR_SCENARIO_QUESTIONS = MODERATOR_QUESTIONS;
+export const ADMINISTRATOR_SCENARIO_QUESTIONS = ADMINISTRATOR_QUESTIONS;
+

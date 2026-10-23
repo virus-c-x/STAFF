@@ -10,9 +10,9 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-modal-backdrop">
       <div
-        className="relative w-full max-w-2xl max-h-[85vh] bg-[#0A0C13] border border-amber-500/30 rounded-2xl flex flex-col shadow-2xl text-slate-200 overflow-hidden"
+        className="relative w-full max-w-2xl max-h-[85vh] bg-[#0A0C13] border border-amber-500/30 rounded-2xl flex flex-col shadow-2xl text-slate-200 overflow-hidden animate-modal-panel"
         role="dialog"
         aria-modal="true"
         aria-labelledby="privacy-modal-title"
@@ -27,7 +27,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
               <h2 id="privacy-modal-title" className="text-base font-bold text-white uppercase tracking-wider">
                 Recruitment Privacy Notice
               </h2>
-              <p className="text-xs text-slate-400">Version 1.0 · Updated for AEGIS Operations</p>
+              <p className="text-xs text-slate-400">Version 1.0 · Updated for ASPIDA Operations</p>
             </div>
           </div>
           <button
@@ -57,7 +57,7 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
               <span>2. Confidentiality & Access Restrictions</span>
             </h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Your application answers are protected under PostgreSQL Row Level Security (RLS) policies. Only authorized recruitment leads and senior community administrators with authenticated staff credentials have access to review your written submissions. Anonymous public users cannot query or inspect your application.
+              Your application answers are protected under strict access controls. Only authorized recruitment leads and senior community administrators with authenticated staff credentials have access to review your written submissions. Anonymous public users cannot query or inspect your application.
             </p>
           </section>
 
@@ -101,9 +101,9 @@ export const PrivacyModal: React.FC<PrivacyModalProps> = ({ isOpen, onClose }) =
         <div className="flex justify-end px-6 py-4 border-t border-white/5 bg-[#07080D] shrink-0">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-xs font-semibold text-black bg-amber-400 hover:bg-amber-300 rounded-lg transition-colors"
+            className="Btn gap-2 shrink-0"
           >
-            I Acknowledge
+            <span>I Acknowledge</span>
           </button>
         </div>
       </div>

@@ -59,12 +59,12 @@ export const StaffHeroBanner: React.FC<StaffHeroBannerProps> = ({
             <div className="space-y-4 max-w-xl text-center md:text-left">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/20 text-amber-300 text-xs font-mono tracking-wider uppercase">
                 <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span>AEGIS Official Staff Selection</span>
+                <span>ASPIDA Official Staff Selection</span>
               </div>
 
               <div>
                 <span className="block text-xs font-mono tracking-[0.25em] text-amber-400/80 uppercase mb-1">
-                  AEGIS COMMUNITY
+                  ASPIDA COMMUNITY
                 </span>
                 <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white uppercase">
                   <span className="gold-gradient-text tracking-wide">STAFF RECRUITMENT</span>
@@ -108,9 +108,9 @@ export const StaffHeroBanner: React.FC<StaffHeroBannerProps> = ({
 
                     {/* Emblem Image Asset */}
                     <img
-                      src={moderatorBadgeImg}
-                      alt="AEGIS Staff Shield Emblem"
-                      className={`w-full h-full object-cover rounded-full transition-opacity duration-300 ${
+                      src="/icon.png"
+                      alt="ASPIDA Staff Emblem"
+                      className={`w-full h-full object-contain p-2 rounded-full transition-opacity duration-300 ${
                         badgeImgLoaded ? 'opacity-100' : 'opacity-0'
                       }`}
                       onLoad={() => setBadgeImgLoaded(true)}
@@ -123,11 +123,6 @@ export const StaffHeroBanner: React.FC<StaffHeroBannerProps> = ({
                       </div>
                     )}
                   </div>
-                </div>
-
-                {/* Badge title pill below circular frame */}
-                <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-[#0E111A] border border-amber-500/40 text-[10px] font-mono text-amber-300 uppercase tracking-widest whitespace-nowrap shadow-md">
-                  AEGIS CREST
                 </div>
               </div>
             </div>
