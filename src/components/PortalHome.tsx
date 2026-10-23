@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lock, ArrowRight, Shield, Megaphone, AlertCircle } from 'lucide-react';
+import { Lock, ArrowRight, Shield, Megaphone } from 'lucide-react';
 import { RecruitmentSettings } from '../types/admin';
 import { fetchRecruitmentSettings } from '../lib/supabase';
 
@@ -27,6 +27,10 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
   const staffIntakeOpen = settings ? settings.staff_intake_open : true;
   const judgeIntakeOpen = settings ? settings.judge_intake_open : false;
 
+  // Use Vite's configured base path so assets work on GitHub Pages.
+  const asset = (filename: string) =>
+    `${import.meta.env.BASE_URL}${filename}`;
+
   return (
     <div className="relative min-h-screen flex flex-col justify-between px-6 py-8 sm:py-12 overflow-hidden bg-[#060709]">
       {/* Background ambient lighting */}
@@ -37,7 +41,7 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
       <header className="relative z-10 max-w-6xl w-full mx-auto flex items-center justify-between">
         <div className="flex items-center gap-3.5">
           <img
-            src="/icon.png"
+            src={asset('icon.png')}
             alt="ASPIDA Icon"
             className="w-10 h-10 sm:w-11 sm:h-11 object-contain drop-shadow-md select-none shrink-0"
           />
@@ -72,12 +76,12 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
         </div>
       )}
 
-      {/* Main Center Stage: Wide Banner, Title & The 2 Cards */}
+      {/* Main Center Stage */}
       <main className="relative z-10 max-w-4xl w-full mx-auto my-auto py-6 sm:py-10 flex flex-col items-center text-center">
         {/* Wide Hero Banner */}
         <div className="w-full max-w-3xl lg:max-w-4xl mb-8 sm:mb-10 rounded-2xl overflow-hidden border border-amber-500/25 shadow-2xl relative bg-[#090B12]">
           <img
-            src="/banner.png"
+            src={asset('banner.png')}
             alt="ASPIDA Official Banner"
             className="w-full h-48 sm:h-64 md:h-72 lg:h-80 object-cover object-center"
           />
@@ -99,21 +103,20 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
           </div>
         </div>
 
-        {/* The Two Primary Cards: STAFF vs JUDGE */}
+        {/* STAFF vs JUDGE */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-2xl px-2">
-          {/* Option 1: STAFF */}
+          {/* STAFF */}
           {staffIntakeOpen ? (
             <button
               type="button"
               onClick={onSelectStaff}
               className="group relative text-left p-8 rounded-2xl border border-amber-500/35 hover:border-amber-400/70 transition-all duration-300 gold-border-glow flex flex-col justify-between min-h-[230px] focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer overflow-hidden shadow-xl"
               style={{
-                backgroundImage: `url('/staffbanner.jpg')`,
+                backgroundImage: `url('${asset('staffbanner.jpg')}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
             >
-              {/* Dark readable gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-b from-[#0A0C13]/90 via-[#0B0D16]/85 to-[#07080D]/95 group-hover:from-[#0A0C13]/80 group-hover:via-[#0B0D16]/75 group-hover:to-[#07080D]/90 transition-all" />
               <div className="absolute -top-12 -right-12 w-28 h-28 bg-amber-400/15 rounded-full blur-2xl group-hover:bg-amber-400/25 transition-all pointer-events-none" />
 
@@ -128,7 +131,6 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
                 <h2 className="text-2xl font-bold tracking-wider text-white group-hover:text-amber-200 transition-colors uppercase drop-shadow">
                   STAFF
                 </h2>
-
                 <p className="text-xs text-slate-300 leading-relaxed mt-2.5 drop-shadow-sm">
                   Apply for community moderation and server administration positions.
                 </p>
@@ -143,7 +145,7 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
             <div
               className="relative text-left p-8 rounded-2xl border border-white/10 opacity-75 cursor-not-allowed flex flex-col justify-between min-h-[230px] select-none overflow-hidden shadow-xl"
               style={{
-                backgroundImage: `url('/staffbanner.jpg')`,
+                backgroundImage: `url('${asset('staffbanner.jpg')}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -161,7 +163,6 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
                 <h2 className="text-2xl font-bold tracking-wider text-slate-200 uppercase drop-shadow">
                   STAFF
                 </h2>
-
                 <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
                   Staff intake is currently paused by administration for this cohort.
                 </p>
@@ -176,14 +177,14 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
             </div>
           )}
 
-          {/* Option 2: JUDGE */}
+          {/* JUDGE */}
           {judgeIntakeOpen ? (
             <button
               type="button"
               onClick={onSelectStaff}
               className="group relative text-left p-8 rounded-2xl border border-amber-500/35 hover:border-amber-400/70 transition-all duration-300 gold-border-glow flex flex-col justify-between min-h-[230px] focus:outline-none focus:ring-2 focus:ring-amber-400/50 cursor-pointer overflow-hidden shadow-xl"
               style={{
-                backgroundImage: `url('/judgebanner.jpg')`,
+                backgroundImage: `url('${asset('judgebanner.jpg')}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
@@ -200,7 +201,6 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
                 <h2 className="text-2xl font-bold tracking-wider text-white group-hover:text-amber-200 transition-colors uppercase drop-shadow">
                   JUDGE
                 </h2>
-
                 <p className="text-xs text-slate-300 leading-relaxed mt-2.5 drop-shadow-sm">
                   Dispute arbitration, tournament governance, and judicial review board.
                 </p>
@@ -215,14 +215,13 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
             <div
               className="relative text-left p-8 rounded-2xl border border-white/10 opacity-75 cursor-not-allowed flex flex-col justify-between min-h-[230px] select-none overflow-hidden shadow-xl"
               style={{
-                backgroundImage: `url('/judgebanner.jpg')`,
+                backgroundImage: `url('${asset('judgebanner.jpg')}')`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
               }}
               aria-disabled="true"
             >
               <div className="absolute inset-0 bg-[#07090E]/85 backdrop-blur-[0.5px]" />
-
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[10px] font-mono tracking-widest text-slate-300 uppercase px-2 py-0.5 rounded bg-black/60 border border-white/15 backdrop-blur-sm flex items-center gap-1.5">
@@ -232,12 +231,9 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
                   <Lock className="w-4 h-4 text-slate-400" />
                 </div>
 
-                <div className="flex items-baseline gap-2">
-                  <h2 className="text-2xl font-bold tracking-wider text-slate-200 uppercase drop-shadow">
-                    JUDGE
-                  </h2>
-                </div>
-
+                <h2 className="text-2xl font-bold tracking-wider text-slate-200 uppercase drop-shadow">
+                  JUDGE
+                </h2>
                 <p className="text-xs text-slate-400 leading-relaxed mt-2.5">
                   Dispute arbitration, tournament governance, and judicial review board.
                 </p>
@@ -254,7 +250,7 @@ export const PortalHome: React.FC<PortalHomeProps> = ({
         </div>
       </main>
 
-      {/* Quiet Footer */}
+      {/* Footer */}
       <footer className="relative z-10 max-w-6xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 text-xs text-slate-400">
         <div className="flex items-center gap-2">
           <span>© {new Date().getFullYear()} ASPIDA Operations</span>
